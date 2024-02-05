@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-
+import Button from "../styleComponents/Button";
 export default function SignIn() {
   return (
     <div>
@@ -9,7 +9,9 @@ export default function SignIn() {
       <input id="username" type="email" />
       <label htmlFor="password">Password</label>
       <input id="password" type="password" />
-      <Link to={'/'}><button>Sign in</button></Link>
+      <Link to={"/"}>
+        <Button>Sign in</Button>
+      </Link>
     </div>
   );
 }

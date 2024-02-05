@@ -4,28 +4,30 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { useState, useEffect } from "react";
 
-function Articles() {
-  const [articles, setArticles] = useState([]);
+export default function Articles() {
+  const [page, setPage] = useState([]);
 
   useEffect(() => {
     fetchArticles().then((data) => {
-      setArticles(data);
+      setPage(data);
     });
   }, []);
-  console.log(articles, "<-- articles in articles");
-  return (
-    <section>
-      <Navigation />
-      <Header title={"Latest Articles"} />
-      <div>
-        <ul>
-          {articles.map((article) => {
-            return <Article></Article>;
-          })}
-        </ul>
-      </div>
-    </section>
-  );
-}
 
-export default Articles;
+  if (page.articles !== undefined) {
+    return (
+      <section>
+        <Navigation />
+        <Header title={"Latest Articles"} />
+        <div>
+          <ul>
+            {page.articles.map((article) => {
+              return <Article key={article.article_id}>{article}</Article>;
+            })}
+          </ul>
+        </div>
+      </section>
+    );
+  } else {
+    return <p>Page loading...</p>;
+  }
+}

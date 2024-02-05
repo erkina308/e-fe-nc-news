@@ -1,21 +1,25 @@
 import { Link } from "react-router-dom";
+import Nav from "../styleComponents/Nav";
+import List from "../styleComponents/Li";
 
-export default function Navigation() {
+function Navigation() {
   return (
     <div>
-      <nav className="navBar">
+      <Nav>
         <ul>
-          <li>
+          <List>
             <Link to={`/`}>Home</Link>
-          </li>
-          <li>
+          </List>
+          <List>
             <Link to={`/sign-in`}>Sign in</Link>
-          </li>
-          <li>
+          </List>
+          <List>
             <Link to={`/create-account`}>Create account</Link>
-          </li>
+          </List>
         </ul>
-      </nav>
+      </Nav>
     </div>
   );
 }
+
+export default Navigation;

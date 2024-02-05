@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import Button from "../styleComponents/Button";
 
 function CreateAcc() {
   return (
@@ -10,7 +11,7 @@ function CreateAcc() {
       <label htmlFor="new-password">Password</label>
       <input id="new-password" type="password" />
       <Link to={"/"}>
-        <button>Create Account</button>
+        <Button>Create Account</Button>
       </Link>
     </div>
   );

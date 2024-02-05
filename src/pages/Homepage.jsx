@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import { Link } from "react-router-dom";
+import Button from "../styleComponents/Button";
+import StyledLink from "../styleComponents/Link";
 
 export default function Homepage() {
   return (
@@ -9,9 +10,9 @@ export default function Homepage() {
         <Navigation />
       </nav>
       <Header title={"Northcoders News"} />
-      <Link to={"/api/articles"}>
-        <button>Enter page</button>
-      </Link>
+      <StyledLink to={"/api/articles"}>
+        <Button>Enter page</Button>
+      </StyledLink>
     </section>
   );
 }
