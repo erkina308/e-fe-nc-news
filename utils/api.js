@@ -15,3 +15,9 @@ export const fetchArticleById = (article_id) => {
     return res.data.article;
   });
 };
+
+export const fetchCommentsByArticleId = (article_id) => {
+  return particleApi.get(`/articles/${article_id}/comments`).then((res) => {
+    return res.data.comment;
+  });
+};
