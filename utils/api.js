@@ -1,11 +1,17 @@
 import axios from "axios";
 
-const api = axios.create({
+const particleApi = axios.create({
   baseURL: "https://particle.onrender.com/api",
 });
 
 export const fetchArticles = () => {
-    return api.get("/articles").then((res) => {
-      return res.data;
-    });
-  };
+  return particleApi.get("/articles").then((res) => {
+    return res.data.articles;
+  });
+};
+
+export const fetchArticleById = (article_id) => {
+  return particleApi.get(`/articles/${article_id}`).then((res) => {
+    return res.data.article;
+  });
+};
