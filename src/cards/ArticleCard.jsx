@@ -1,6 +1,6 @@
 import Button from "../styleComponents/Button";
 
-function Article({ children }) {
+function ArticleCard({ children }) {
   const { article_img_url, author, body, created_at, title, votes, topic } =
     children;
   return (
@@ -17,4 +17,4 @@ function Article({ children }) {
     </section>
   );
 }
-export default Article;
+export default ArticleCard;
