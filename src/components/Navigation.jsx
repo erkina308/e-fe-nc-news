@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
 import Nav from "../styleComponents/Nav";
-import List from "../styleComponents/Li";
+import NavContainer from "../styleComponents/NavContainer";
+import NavElements from "../styleComponents/NavElements";
 
 function Navigation() {
   return (
-    <div>
-      <Nav>
-        <ul>
-          <List>
-            <Link to={`/`}>Home</Link>
-          </List>
-          <List>
-            <Link to={`/sign-in`}>Sign in</Link>
-          </List>
-          <List>
-            <Link to={`/create-account`}>Create account</Link>
-          </List>
-        </ul>
-      </Nav>
-    </div>
+    <Nav>
+      <NavContainer>
+        <NavElements>
+          <ul>
+            <li>
+              <Link to={`/`}>Home</Link>
+            </li>
+            <li>
+              <Link to={`/sign-in`}>Sign in</Link>
+            </li>
+            <li>
+              <Link to={`/create-account`}>Create account</Link>
+            </li>
+          </ul>
+        </NavElements>
+      </NavContainer>
+    </Nav>
   );
 }
 

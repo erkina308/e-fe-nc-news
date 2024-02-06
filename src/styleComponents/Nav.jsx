@@ -1,16 +1,9 @@
 import styled from "styled-components";
 
 const Nav = styled.nav`
-  overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  font-size: 16px;
-  & ul {
-    padding: 0;
-    margin: 0;
-  }
+  height: 60px;
+  background-color: #fef7e5;
+  position: relative;
 `;
 
 export default Nav;
