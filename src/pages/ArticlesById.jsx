@@ -4,6 +4,7 @@ import { fetchArticleById } from "../../utils/api";
 import Navigation from "../components/Navigation";
 import Header from "../components/Header";
 import ArticleCard from "../cards/ArticleCard";
+import Comments from "../pages/Comments";
 
 export default function ArticleById() {
   const [article, setArticle] = useState([]);
@@ -25,6 +26,7 @@ export default function ArticleById() {
       <div>
         <ul>
           <ArticleCard key={article.article_id}>{article}</ArticleCard>
+          <Comments article_id={article.article_id} />
         </ul>
       </div>
     </section>
