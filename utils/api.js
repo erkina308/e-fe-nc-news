@@ -22,11 +22,11 @@ export const fetchCommentsByArticleId = (article_id) => {
   });
 };
 
-// export const patchArticleVotes = (article_id, num) => {
-//   return particleApi
-//     .patch(`/articles/${article_id}`, { votes: num })
-//     .then((res) => {
-//       console.log(res.data.article.votes, "<-- within axios api");
-//       return res.data.article.votes;
-//     });
-// };
+export const patchArticleVotes = (article_id, num) => {
+  console.log("api");
+  return particleApi
+    .patch(`/articles/${article_id}`, { inc_votes: num })
+    .then((res) => {
+      return res.data.votes;
+    });
+};

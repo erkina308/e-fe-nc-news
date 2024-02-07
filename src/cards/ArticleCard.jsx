@@ -1,12 +1,11 @@
-import Button from "../styleComponents/Button";
 import StyledLink from "../styleComponents/Link";
 import { BiSolidLike } from "react-icons/bi";
 import { BiSolidDislike } from "react-icons/bi";
-// import { patchArticleVotes } from "../../utils/api";
+import { patchArticleVotes } from "../../utils/api";
+import Button from "../styleComponents/Button";
 import { useState } from "react";
 
 function ArticleCard({ children }) {
-  const [vote, setVote] = useState(0);
   const {
     article_img_url,
     author,
@@ -16,16 +15,19 @@ function ArticleCard({ children }) {
     votes,
     article_id,
   } = children;
-  function incrementVote() {
+
+  const [vote, setVote] = useState(votes);
+
+  function incrementVote(event) {
+    event.preventDefault();
     setVote((currentVote) => currentVote + 1);
-    // patchArticleVotes(article_id, 1).then((data) => {
-    // });
+    patchArticleVotes(article_id, 1);
   }
 
-  function decrementVote() {
-    if (vote > 0) {
-      setVote((currentVote) => currentVote - 1);
-    }
+  function decrementVote(event) {
+    event.preventDefault();
+    setVote((currentVote) => currentVote - 1);
+    patchArticleVotes(article_id, -1);
   }
 
   return (
@@ -39,14 +41,12 @@ function ArticleCard({ children }) {
         <p>{body}</p>
         <p>{new Date(created_at).toLocaleDateString("en-GB")}</p>
         <p>{vote}</p>
-        <div>
-          <Button onClick={incrementVote}>
-            <BiSolidLike />
-          </Button>
-          <Button onClick={decrementVote}>
-            <BiSolidDislike />
-          </Button>
-        </div>
+        <Button onClick={incrementVote}>
+          <BiSolidLike />
+        </Button>
+        <Button onClick={decrementVote}>
+          <BiSolidDislike />
+        </Button>
       </div>
     </section>
   );
