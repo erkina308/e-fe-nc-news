@@ -23,10 +23,20 @@ export const fetchCommentsByArticleId = (article_id) => {
 };
 
 export const patchArticleVotes = (article_id, num) => {
-  console.log("api");
   return particleApi
     .patch(`/articles/${article_id}`, { inc_votes: num })
     .then((res) => {
       return res.data.votes;
+    });
+};
+
+export const postCommentByArticleId = (article_id, username, body) => {
+  return particleApi
+    .post(`/articles/${article_id}/comments`, {
+      username: username,
+      body: body,
+    })
+    .then((res) => {
+      return res.data;
     });
 };
