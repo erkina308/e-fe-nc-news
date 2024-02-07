@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Nav from "../styleComponents/Nav";
 import NavContainer from "../styleComponents/NavContainer";
 import NavElements from "../styleComponents/NavElements";
@@ -10,13 +10,13 @@ function Navigation() {
         <NavElements>
           <ul>
             <li>
-              <Link to={`/`}>Home</Link>
+              <NavLink to={`/`}>Home</NavLink>
             </li>
             <li>
-              <Link to={`/sign-in`}>Sign in</Link>
+              <NavLink to={`/sign-in`}>Sign in</NavLink>
             </li>
             <li>
-              <Link to={`/create-account`}>Create account</Link>
+              <NavLink to={`/create-account`}>Create account</NavLink>
             </li>
           </ul>
         </NavElements>

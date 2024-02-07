@@ -5,7 +5,8 @@ import Navigation from "../components/Navigation";
 import Expandable from "../components/Expandable";
 import Comments from "../pages/Comments";
 import { useState, useEffect } from "react";
-
+import NewComment from "./NewComment";
+import ExpandablePost from "../components/ExpandablePost";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
@@ -27,11 +28,18 @@ export default function Articles() {
         <ul>
           {articles.map((article) => {
             return (
-              <div key={`${article.article_id}${article.comment_id}`}>
-                <ArticleCard>{article}</ArticleCard>
-                <Expandable>
-                  <Comments article_id={article.article_id} />
-                </Expandable>
+              <div key={article.title}>
+                <div key={`${article.article_id}${article.comment_id}`}>
+                  <ArticleCard>{article}</ArticleCard>
+                  <Expandable>
+                    <Comments article_id={article.article_id} />
+                  </Expandable>
+                </div>
+                <div key={article.comment_id}>
+                  <ExpandablePost>
+                    <NewComment article_id={article.article_id} />
+                  </ExpandablePost>
+                </div>
               </div>
             );
           })}
