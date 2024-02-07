@@ -17,24 +17,29 @@ function ArticleCard({ children }) {
     article_id,
   } = children;
 
-  const btnRef = useRef();
+  const likeBtnRef = useRef();
+  const dislikeBtnRef = useRef();
   const [vote, setVote] = useState(votes);
 
   function incrementVote(event) {
     event.preventDefault();
     setVote((currentVote) => currentVote + 1);
     patchArticleVotes(article_id, 1);
-    if (btnRef.current) {
-      btnRef.current.setAttribute("disabled", "disabled");
+    if (likeBtnRef.current) {
+      likeBtnRef.current.setAttribute("disabled", "disabled");
+      dislikeBtnRef.current.setAttribute("disabled", "disabled");
     }
   }
 
   function decrementVote(event) {
     event.preventDefault();
-    setVote((currentVote) => currentVote - 1);
-    patchArticleVotes(article_id, -1);
-    if (btnRef.current) {
-      btnRef.current.setAttribute("disabled", "disabled");
+    if (vote > 0) {
+      setVote((currentVote) => currentVote - 1);
+      patchArticleVotes(article_id, -1);
+      if (dislikeBtnRef.current) {
+        likeBtnRef.current.setAttribute("disabled", "disabled");
+        dislikeBtnRef.current.setAttribute("disabled", "disabled");
+      }
     }
   }
 
@@ -50,10 +55,10 @@ function ArticleCard({ children }) {
         <p>{new Date(created_at).toLocaleDateString("en-GB")}</p>
         <div>
           <p>{vote}</p>
-          <Button ref={btnRef} onClick={incrementVote}>
+          <Button ref={likeBtnRef} onClick={incrementVote}>
             <BiSolidLike />
           </Button>
-          <Button ref={btnRef} onClick={decrementVote}>
+          <Button ref={dislikeBtnRef} onClick={decrementVote}>
             <BiSolidDislike />
           </Button>
         </div>
