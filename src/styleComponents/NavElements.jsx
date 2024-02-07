@@ -3,7 +3,7 @@ import styled from "styled-components";
 const NavElements = styled.div`
   & ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     list-style-type: none;
     & li {
       & :not(:last-child) {

@@ -6,6 +6,7 @@ import Expandable from "../components/Expandable";
 import Comments from "../pages/Comments";
 import { useState, useEffect } from "react";
 
+
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
