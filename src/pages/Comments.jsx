@@ -1,6 +1,7 @@
 import { fetchCommentsByArticleId } from "../../utils/api";
 import { useState, useEffect } from "react";
 import CommentCard from "../cards/CommentCard";
+import DeleteComment from "../components/DeleteComment";
 
 export default function Comments({ article_id }) {
   const [comments, setComments] = useState([]);
@@ -24,6 +25,7 @@ export default function Comments({ article_id }) {
               <div key={comment.comment_id}>
                 <ul>
                   <CommentCard>{comment}</CommentCard>
+                  <DeleteComment comment_id={comment.comment_id} />
                 </ul>
               </div>
             );

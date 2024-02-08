@@ -7,6 +7,7 @@ import CreateAcc from "./pages/CreateAcc";
 import Articles from "./pages/Articles";
 import ArticleById from "./pages/ArticlesById";
 import CommentsById from "./pages/CommentsById";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           path="/api/articles/:article_id/comments"
           element={<CommentsById />}
         />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );

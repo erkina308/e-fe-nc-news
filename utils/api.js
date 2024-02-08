@@ -40,3 +40,7 @@ export const postCommentByArticleId = (article_id, username, body) => {
       return res.data;
     });
 };
+
+export const deleteCommentById = (comment_id) => {
+  return particleApi.delete(`/comments/${comment_id}`);
+};
