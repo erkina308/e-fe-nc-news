@@ -18,7 +18,7 @@ export default function Comments({ article_id }) {
   return (
     <section>
       <div>
-        <h3>Comments</h3>
+        <h3>Comments here</h3>
         <ul>
           {comments.map((comment) => {
             return (
