@@ -19,6 +19,7 @@ export default function NewComment({ article_id }) {
           type="text"
           name="username"
           id="username"
+          autoComplete="on"
           value={userInput}
           onChange={(event) => setUserInput(event.target.value)}
         />
