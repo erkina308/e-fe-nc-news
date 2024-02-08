@@ -1,15 +1,30 @@
 import Header from "../components/Header";
 import { postCommentByArticleId } from "../../utils/api";
 import { useState } from "react";
+import Button from "../styleComponents/Button";
 
 export default function NewComment({ article_id }) {
+  const [error, setError] = useState(null);
+  const [isPosted, setIsPosted] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [bodyInput, setBodyInput] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
-    postCommentByArticleId(article_id, userInput, bodyInput);
+    setButtonDisabled(true);
+    setUserInput("");
+    setBodyInput("");
+    postCommentByArticleId(article_id, userInput, bodyInput)
+      .then(() => {
+        setButtonDisabled(false);
+      })
+      .catch((err) => {
+        setError({ err });
+      });
+    setIsPosted(true);
   }
+
   return (
     <section>
       <Header title={"New comment"} />
@@ -22,16 +37,21 @@ export default function NewComment({ article_id }) {
           autoComplete="on"
           value={userInput}
           onChange={(event) => setUserInput(event.target.value)}
+          required
         />
         <label htmlFor="newComment">Comment</label>
-        <input
-          type="text"
+        <textarea
           name="newComment"
           id="newComment"
           value={bodyInput}
           onChange={(event) => setBodyInput(event.target.value)}
+          required
         />
-        <button type="submit">Post</button>
+        <Button disabled={buttonDisabled} type="submit">
+          Post
+        </Button>
+        {error ? <p>Failed to post</p> : null}
+        {isPosted ? <p>Comment posted</p> : null}
       </form>
     </section>
   );
