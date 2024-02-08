@@ -3,7 +3,7 @@ import { postCommentByArticleId } from "../../utils/api";
 import { useState } from "react";
 import Button from "../styleComponents/Button";
 
-export default function NewComment({ article_id }) {
+function NewComment({ article_id }) {
   const [error, setError] = useState(null);
   const [isPosted, setIsPosted] = useState(false);
   const [userInput, setUserInput] = useState("");
@@ -17,12 +17,16 @@ export default function NewComment({ article_id }) {
     setBodyInput("");
     postCommentByArticleId(article_id, userInput, bodyInput)
       .then(() => {
+        setIsPosted(true);
+        setButtonDisabled(true);
+      })
+      .then(() => {
         setButtonDisabled(false);
       })
       .catch((err) => {
         setError({ err });
+        setButtonDisabled(false);
       });
-    setIsPosted(true);
   }
 
   return (
@@ -50,9 +54,11 @@ export default function NewComment({ article_id }) {
         <Button disabled={buttonDisabled} type="submit">
           Post
         </Button>
-        {error ? <p>Failed to post</p> : null}
-        {isPosted ? <p>Comment posted</p> : null}
+        {error ? <p>Incorrect username</p> : null}
+        {isPosted && !error ? <p>Comment posted</p> : null}
       </form>
     </section>
   );
 }
+
+export default NewComment;
