@@ -46,7 +46,7 @@ function ArticleCard({ children }) {
   return (
     <section>
       <div>
-        <h3>{author}</h3>
+        <h3>{title}</h3>
         <StyledLink to={`/api/articles/${article_id}`}>
           <img src={article_img_url} />
         </StyledLink>
@@ -54,7 +54,7 @@ function ArticleCard({ children }) {
         <p>{body}</p>
         <p>{new Date(created_at).toLocaleDateString("en-GB")}</p>
         <div>
-          <p>{vote}</p>
+          <p>Likes: {vote}</p>
           <Button ref={likeBtnRef} onClick={incrementVote}>
             <BiSolidLike />
           </Button>

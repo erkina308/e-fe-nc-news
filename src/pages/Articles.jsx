@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { fetchArticles } from "../../utils/api";
 import ArticleCard from "../cards/ArticleCard";
 import CommentManager from "../components/CommentManager";
@@ -8,9 +9,10 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [commentCount, setCommentCount] = useState(0);
-  
+  const { topic } = useParams();
+  console.log(topic, "<--- in articles");
   useEffect(() => {
-    fetchArticles().then((data) => {
+    fetchArticles(topic).then((data) => {
       setArticles(data);
       setIsLoading(false);
     });
@@ -20,7 +22,6 @@ export default function Articles() {
   return (
     <section>
       <Header title={"Latest Articles"} />
-
       <div>
         <ul>
           {articles.map((article) => {

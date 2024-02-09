@@ -1,18 +1,20 @@
 import Header from "../components/Header";
 import { postCommentByArticleId } from "../../utils/api";
-import { useState } from "react";
 import Button from "../styleComponents/Button";
+import { useContext, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 function NewComment({ article_id, comments, setComments, setCommentCount }) {
-  const [error, setError] = useState(null);
+  const { user } = useContext(UserContext);
+  // const [error, setError] = useState(null);
   const [isPosted, setIsPosted] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [bodyInput, setBodyInput] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const input = {
     article_id: article_id,
-    author: userInput,
-    username: userInput,
+    author: user.username,
+    username: user.username,
     body: bodyInput,
     votes: 0,
     created_at: new Date().toLocaleDateString("en-GB"),
@@ -31,17 +33,17 @@ function NewComment({ article_id, comments, setComments, setCommentCount }) {
       })
       .then(() => {
         setButtonDisabled(false);
-      })
-      .catch((err) => {
-        setError({ err });
-        setButtonDisabled(false);
       });
+    // .catch((err) => {
+    //   setError({ err });
+    //   setButtonDisabled(false);
+    // });
   }
   return (
     <section>
       <Header title={"New comment"} />
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+        {/* <label htmlFor="username">Username</label>
         <input
           type="text"
           name="username"
@@ -50,7 +52,7 @@ function NewComment({ article_id, comments, setComments, setCommentCount }) {
           value={userInput}
           onChange={(event) => setUserInput(event.target.value)}
           required
-        />
+        /> */}
         <label htmlFor="newComment">Comment</label>
         <textarea
           name="newComment"
@@ -62,8 +64,8 @@ function NewComment({ article_id, comments, setComments, setCommentCount }) {
         <Button disabled={buttonDisabled} type="submit">
           Post
         </Button>
-        {error ? <p>Incorrect username</p> : null}
-        {isPosted && !error ? <p>Comment posted</p> : null}
+        {/* {error ? <p>Incorrect username</p> : null} */}
+        {isPosted ? <p>Comment posted</p> : null}
       </form>
     </section>
   );
