@@ -30,11 +30,11 @@ export const patchArticleVotes = (article_id, num) => {
     });
 };
 
-export const postCommentByArticleId = (article_id, username, body) => {
+export const postCommentByArticleId = (article_id, input) => {
   return particleApi
     .post(`/articles/${article_id}/comments`, {
-      username: username,
-      body: body,
+      username: input.username,
+      body: input.body,
     })
     .then((res) => {
       return res.data;
@@ -43,4 +43,10 @@ export const postCommentByArticleId = (article_id, username, body) => {
 
 export const deleteCommentById = (comment_id) => {
   return particleApi.delete(`/comments/${comment_id}`);
+};
+
+export const fetchUsers = () => {
+  return particleApi.get("/users").then((res) => {
+    return res.data.users;
+  });
 };

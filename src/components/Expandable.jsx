@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../styleComponents/Button";
 
 export default function Expandable({ children }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   function toggleOpen() {
     setIsOpen((currentState) => !currentState);

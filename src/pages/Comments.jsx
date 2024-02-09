@@ -1,23 +1,10 @@
-import { fetchCommentsByArticleId } from "../../utils/api";
-import { useState, useEffect } from "react";
 import CommentCard from "../cards/CommentCard";
-import DeleteComment from "../components/DeleteComment";
+import DeleteCommentBtn from "../components/DeleteCommentBtn";
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserProvider";
+import { UserContext } from "../contexts/UserContext";
 
-export default function Comments({ article_id }) {
-  const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function Comments({ comments }) {
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    fetchCommentsByArticleId(article_id).then((commentData) => {
-      setComments(commentData);
-      setIsLoading(false);
-    });
-  }, [article_id]);
-
-  if (isLoading) return <p>Page loading...</p>;
   return (
     <section>
       <div>
@@ -25,11 +12,11 @@ export default function Comments({ article_id }) {
         <ul>
           {comments.map((comment) => {
             return (
-              <div key={comment.comment_id}>
+              <div key={`${comment.author}${comment.comment_id}`}>
                 <ul>
                   <CommentCard>{comment}</CommentCard>
                   {user.username === comment.author ? (
-                    <DeleteComment comment_id={comment.comment_id} />
+                    <DeleteCommentBtn comment_id={comment.comment_id} />
                   ) : null}
                 </ul>
               </div>

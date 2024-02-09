@@ -2,7 +2,7 @@ import { deleteCommentById } from "../../utils/api";
 import DeleteButton from "../styleComponents/DeleteButton";
 import { useState } from "react";
 
-export default function DeleteComment({ comment_id }) {
+export default function DeleteCommentBtn({ comment_id }) {
   const [isDeleted, setIsDeleted] = useState(false);
   function handleDelete(event) {
     setIsDeleted(true);

@@ -3,22 +3,31 @@ import { postCommentByArticleId } from "../../utils/api";
 import { useState } from "react";
 import Button from "../styleComponents/Button";
 
-function NewComment({ article_id }) {
+function NewComment({ article_id, comments, setComments, setCommentCount }) {
   const [error, setError] = useState(null);
   const [isPosted, setIsPosted] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [bodyInput, setBodyInput] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
-
+  const input = {
+    article_id: article_id,
+    author: userInput,
+    username: userInput,
+    body: bodyInput,
+    votes: 0,
+    created_at: new Date().toLocaleDateString("en-GB"),
+  };
   function handleSubmit(event) {
     event.preventDefault();
     setButtonDisabled(true);
     setUserInput("");
     setBodyInput("");
-    postCommentByArticleId(article_id, userInput, bodyInput)
+    postCommentByArticleId(article_id, input)
       .then(() => {
         setIsPosted(true);
         setButtonDisabled(true);
+        setComments([...comments, input]);
+        setCommentCount((count) => count + 1);
       })
       .then(() => {
         setButtonDisabled(false);
@@ -28,7 +37,6 @@ function NewComment({ article_id }) {
         setButtonDisabled(false);
       });
   }
-
   return (
     <section>
       <Header title={"New comment"} />
