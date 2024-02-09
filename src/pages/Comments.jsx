@@ -9,12 +9,12 @@ function Comments({ comments, setComments }) {
   const [isDeleted, setIsDeleted] = useState(false);
   function handleDelete(id, e) {
     e.preventDefault();
-    deleteCommentById(id);
     const newComments = comments.filter((comment) => {
       return comment.comment_id !== id;
     });
     setIsDeleted(true);
     setComments(newComments);
+    deleteCommentById(id);
   }
 
   return (

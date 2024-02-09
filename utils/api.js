@@ -4,10 +4,16 @@ const particleApi = axios.create({
   baseURL: "https://particle.onrender.com/api",
 });
 
-export const fetchArticles = () => {
-  return particleApi.get("/articles").then((res) => {
-    return res.data.articles;
-  });
+export const fetchArticles = (topic) => {
+  return particleApi
+    .get("/articles", {
+      params: {
+        topic: topic,
+      },
+    })
+    .then((res) => {
+      return res.data.articles;
+    });
 };
 
 export const fetchArticleById = (article_id) => {
