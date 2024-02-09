@@ -8,7 +8,7 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [commentCount, setCommentCount] = useState(0);
-
+  
   useEffect(() => {
     fetchArticles().then((data) => {
       setArticles(data);
@@ -26,7 +26,7 @@ export default function Articles() {
           {articles.map((article) => {
             return (
               <div key={article.title}>
-                <div key={`${article.article_id}${article.comment_id}`}>
+                <div key={`${article.article_id}${article.author}`}>
                   <ArticleCard>{article}</ArticleCard>
                   <CommentManager
                     created_at={article.created_at}

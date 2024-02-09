@@ -1,10 +1,22 @@
 import CommentCard from "../cards/CommentCard";
-import DeleteCommentBtn from "../components/DeleteCommentBtn";
-import { useContext } from "react";
+import DeleteButton from "../styleComponents/DeleteButton";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { deleteCommentById } from "../../utils/api";
 
-export default function Comments({ comments }) {
+function Comments({ comments, setComments }) {
   const { user } = useContext(UserContext);
+  const [isDeleted, setIsDeleted] = useState(false);
+  function handleDelete(id, e) {
+    e.preventDefault();
+    deleteCommentById(id);
+    const newComments = comments.filter((comment) => {
+      return comment.comment_id !== id;
+    });
+    setIsDeleted(true);
+    setComments(newComments);
+  }
+
   return (
     <section>
       <div>
@@ -16,7 +28,11 @@ export default function Comments({ comments }) {
                 <ul>
                   <CommentCard>{comment}</CommentCard>
                   {user.username === comment.author ? (
-                    <DeleteCommentBtn comment_id={comment.comment_id} />
+                    <DeleteButton
+                      onClick={(e) => handleDelete(comment.comment_id, e)}
+                    >
+                      Delete comment
+                    </DeleteButton>
                   ) : null}
                 </ul>
               </div>
@@ -27,3 +43,4 @@ export default function Comments({ comments }) {
     </section>
   );
 }
+export default Comments;

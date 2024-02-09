@@ -40,6 +40,7 @@ export default function CommentManager({
           <Comments
             comments={comments}
             article_id={article_id}
+            setComments={setComments}
           />
         )}
       </Expandable>
