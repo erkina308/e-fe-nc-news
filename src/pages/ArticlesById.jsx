@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchArticleById } from "../../utils/api";
-import Navigation from "../components/Navigation";
 import Header from "../components/Header";
 import ArticleCard from "../cards/ArticleCard";
-import Comments from "../pages/Comments";
-import ExpandablePost from "../components/ExpandablePost";
-import NewComment from "./NewComment";
 import Button from "../styleComponents/Button";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import ErrorPage from "./ErrorPage";
+import CommentManager from "../components/CommentManager";
 
 function ArticleById() {
   const [error, setError] = useState(null);
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [commentCount, setCommentCount] = useState(0);
   const { article_id } = useParams();
 
   useEffect(() => {
@@ -27,7 +25,7 @@ function ArticleById() {
         setError({ err });
       });
   }, [article_id]);
-  
+
   if (error) {
     return (
       <ErrorPage
@@ -40,7 +38,6 @@ function ArticleById() {
   if (isLoading) return <p>Page loading...</p>;
   return (
     <section>
-      <Navigation />
       <Header title={"Selected Article"} />
       <Link to={"/api/articles"}>
         <Button>
@@ -50,12 +47,12 @@ function ArticleById() {
       <div>
         <ul>
           <ArticleCard key={article_id}>{article}</ArticleCard>
-          <Comments article_id={article_id} />
-          <div>
-            <ExpandablePost>
-              <NewComment article_id={article_id} />
-            </ExpandablePost>
-          </div>
+          <CommentManager
+            created_at={article.created_at}
+            article_id={article.article_id}
+            commentCount={commentCount}
+            setCommentCount={setCommentCount}
+          />
         </ul>
       </div>
     </section>

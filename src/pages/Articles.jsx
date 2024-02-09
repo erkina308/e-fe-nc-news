@@ -1,17 +1,14 @@
 import { fetchArticles } from "../../utils/api";
 import ArticleCard from "../cards/ArticleCard";
+import CommentManager from "../components/CommentManager";
 import Header from "../components/Header";
-import Navigation from "../components/Navigation";
-import Expandable from "../components/Expandable";
-import Comments from "../pages/Comments";
 import { useState, useEffect } from "react";
-import NewComment from "./NewComment";
-import ExpandablePost from "../components/ExpandablePost";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [commentCount, setCommentCount] = useState(0);
+  
   useEffect(() => {
     fetchArticles().then((data) => {
       setArticles(data);
@@ -22,23 +19,21 @@ export default function Articles() {
   if (isLoading) return <p>Page loading...</p>;
   return (
     <section>
-      <Navigation />
       <Header title={"Latest Articles"} />
+
       <div>
         <ul>
           {articles.map((article) => {
             return (
               <div key={article.title}>
-                <div key={`${article.article_id}${article.comment_id}`}>
+                <div key={`${article.article_id}${article.author}`}>
                   <ArticleCard>{article}</ArticleCard>
-                  <Expandable>
-                    <Comments article_id={article.article_id} />
-                  </Expandable>
-                </div>
-                <div key={article.comment_id}>
-                  <ExpandablePost>
-                    <NewComment article_id={article.article_id} />
-                  </ExpandablePost>
+                  <CommentManager
+                    created_at={article.created_at}
+                    article_id={article.article_id}
+                    commentCount={commentCount}
+                    setCommentCount={setCommentCount}
+                  />
                 </div>
               </div>
             );

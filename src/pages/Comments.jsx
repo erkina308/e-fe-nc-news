@@ -1,23 +1,22 @@
-import { fetchCommentsByArticleId } from "../../utils/api";
-import { useState, useEffect } from "react";
 import CommentCard from "../cards/CommentCard";
-import DeleteComment from "../components/DeleteComment";
-import { useContext } from "react";
-import { UserContext } from "../contexts/UserProvider";
+import DeleteButton from "../styleComponents/DeleteButton";
+import { useContext, useState } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { deleteCommentById } from "../../utils/api";
 
-export default function Comments({ article_id }) {
-  const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+function Comments({ comments, setComments }) {
   const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    fetchCommentsByArticleId(article_id).then((commentData) => {
-      setComments(commentData);
-      setIsLoading(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  function handleDelete(id, e) {
+    e.preventDefault();
+    deleteCommentById(id);
+    const newComments = comments.filter((comment) => {
+      return comment.comment_id !== id;
     });
-  }, [article_id]);
+    setIsDeleted(true);
+    setComments(newComments);
+  }
 
-  if (isLoading) return <p>Page loading...</p>;
   return (
     <section>
       <div>
@@ -25,11 +24,15 @@ export default function Comments({ article_id }) {
         <ul>
           {comments.map((comment) => {
             return (
-              <div key={comment.comment_id}>
+              <div key={`${comment.author}${comment.comment_id}`}>
                 <ul>
                   <CommentCard>{comment}</CommentCard>
                   {user.username === comment.author ? (
-                    <DeleteComment comment_id={comment.comment_id} />
+                    <DeleteButton
+                      onClick={(e) => handleDelete(comment.comment_id, e)}
+                    >
+                      Delete comment
+                    </DeleteButton>
                   ) : null}
                 </ul>
               </div>
@@ -40,3 +43,4 @@ export default function Comments({ article_id }) {
     </section>
   );
 }
+export default Comments;

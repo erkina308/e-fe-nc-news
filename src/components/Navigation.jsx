@@ -2,26 +2,31 @@ import { NavLink } from "react-router-dom";
 import Nav from "../styleComponents/Nav";
 import NavContainer from "../styleComponents/NavContainer";
 import NavElements from "../styleComponents/NavElements";
-
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 function Navigation() {
+  const { user } = useContext(UserContext);
+
   return (
-    <Nav>
-      <NavContainer>
-        <NavElements>
-          <ul>
-            <li>
-              <NavLink to={`/`}>Home</NavLink>
-            </li>
-            <li>
-              <NavLink to={`/sign-in`}>Sign in</NavLink>
-            </li>
-            <li>
-              <NavLink to={`/create-account`}>Create account</NavLink>
-            </li>
-          </ul>
-        </NavElements>
-      </NavContainer>
-    </Nav>
+    <div>
+      <Nav>
+        <NavContainer>
+          <NavElements>
+            <ul>
+              <li>
+                <NavLink to={`/`}>Home</NavLink>
+              </li>
+              <li>
+                <NavLink to={`/sign-in`}>Change user</NavLink>
+              </li>
+            </ul>
+          </NavElements>
+        </NavContainer>
+      </Nav>
+      <div>
+        <p>Current user: {user.username}</p>
+      </div>
+    </div>
   );
 }
 
