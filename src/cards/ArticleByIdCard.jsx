@@ -1,11 +1,12 @@
-import StyledLink from "../styleComponents/Link";
-import Img from "../styleComponents/Img";
+import { BiSolidLike } from "react-icons/bi";
+import { BiSolidDislike } from "react-icons/bi";
 import { patchArticleVotes } from "../../utils/api";
-
+import Button from "../styleComponents/Button";
 import { useState } from "react";
 import { useRef } from "react";
+import Img from "../styleComponents/Img";
 
-function ArticleCard({ children }) {
+function ArticleByIdCard({ children }) {
   const {
     article_img_url,
     author,
@@ -46,11 +47,20 @@ function ArticleCard({ children }) {
     <section>
       <div>
         <h2>{title}</h2>
-        <StyledLink to={`/api/articles/${article_id}`}>
-          <Img src={article_img_url} />
-        </StyledLink>
+        <Img src={article_img_url} />
+        <p>{body}</p>
+        <p>{new Date(created_at).toLocaleDateString("en-GB")}</p>
+        <div>
+          <p>Likes: {vote}</p>
+          <Button ref={likeBtnRef} onClick={incrementVote}>
+            <BiSolidLike />
+          </Button>
+          <Button ref={dislikeBtnRef} onClick={decrementVote}>
+            <BiSolidDislike />
+          </Button>
+        </div>
       </div>
     </section>
   );
 }
-export default ArticleCard;
+export default ArticleByIdCard;

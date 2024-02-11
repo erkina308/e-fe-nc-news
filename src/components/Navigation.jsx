@@ -17,6 +17,9 @@ function Navigation() {
                 <NavLink to={`/`}>Home</NavLink>
               </li>
               <li>
+                <NavLink to={`/api/articles`}>Articles</NavLink>
+              </li>
+              <li>
                 <NavLink to={`/sign-in`}>Change user</NavLink>
               </li>
             </ul>

@@ -6,7 +6,7 @@ function CommentCard({ children }) {
         <h3 key={author}>{author}</h3>
         <p>{body}</p>
         <p>{new Date(created_at).toLocaleDateString("en-GB")}</p>
-        <p>{votes}</p>
+        <p>Likes: {votes}</p>
       </div>
     </section>
   );

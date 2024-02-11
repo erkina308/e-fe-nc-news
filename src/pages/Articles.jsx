@@ -1,22 +1,22 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { fetchArticles } from "../../utils/api";
 import ArticleCard from "../cards/ArticleCard";
-import CommentManager from "../components/CommentManager";
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
+import ArticleDiv from "../styleComponents/ArticleDiv";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [commentCount, setCommentCount] = useState(0);
-  const { topic } = useParams();
-  console.log(topic, "<--- in articles");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topic = searchParams.get("topic");
+
   useEffect(() => {
     fetchArticles(topic).then((data) => {
       setArticles(data);
       setIsLoading(false);
     });
-  }, []);
+  }, [topic]);
 
   if (isLoading) return <p>Page loading...</p>;
   return (
@@ -27,15 +27,9 @@ export default function Articles() {
           {articles.map((article) => {
             return (
               <div key={article.title}>
-                <div key={`${article.article_id}${article.author}`}>
+                <ArticleDiv key={`${article.article_id}${article.author}`}>
                   <ArticleCard>{article}</ArticleCard>
-                  <CommentManager
-                    created_at={article.created_at}
-                    article_id={article.article_id}
-                    commentCount={commentCount}
-                    setCommentCount={setCommentCount}
-                  />
-                </div>
+                </ArticleDiv>
               </div>
             );
           })}
