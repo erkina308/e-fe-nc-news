@@ -20,7 +20,7 @@ function Comments({ comments, setComments }) {
   return (
     <section>
       <div>
-        <h3>Comments</h3>
+        <h2>Comments</h2>
         <ul>
           {comments.map((comment) => {
             return (

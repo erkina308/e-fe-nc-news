@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchArticleById } from "../../utils/api";
 import Header from "../components/Header";
-import ArticleCard from "../cards/ArticleCard";
+import ArticleByIdCard from "../cards/ArticleByIdCard";
 import Button from "../styleComponents/Button";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import ErrorPage from "./ErrorPage";
@@ -46,7 +46,7 @@ function ArticleById() {
       </Link>
       <div>
         <ul>
-          <ArticleCard key={article_id}>{article}</ArticleCard>
+          <ArticleByIdCard key={article_id}>{article}</ArticleByIdCard>
           <CommentManager
             created_at={article.created_at}
             article_id={article.article_id}
