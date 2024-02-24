@@ -6,6 +6,8 @@ const NavElements = styled.div`
     justify-content: space-evenly;
     list-style-type: none;
     & li {
+      display: flex;
+      jusitfy-content: space-between;
       & :not(:last-child) {
         margin-right: 60px;
       }
@@ -15,6 +17,7 @@ const NavElements = styled.div`
       font-weight: 400;
       color: black;
       text-decoration: none;
+
       & .active {
         color: #574c4c;
         font-weight: 500;

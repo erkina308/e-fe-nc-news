@@ -5,9 +5,9 @@ import StyledLink from "../styleComponents/Link";
 export default function Homepage() {
   return (
     <section>
-      <Header title={"Northcoders News"} />
-      <StyledLink to={"/api/articles"}>
-        <Button>Enter page</Button>
+      <Header title={"Particle"} />
+      <StyledLink className="homepageLink" to={"/api/articles"}>
+        <Button className="homepageButton">Enter page</Button>
       </StyledLink>
     </section>
   );

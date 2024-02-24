@@ -29,7 +29,21 @@ body {
   color: black;
 }
 
-.header {
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepageLink {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 /* 
