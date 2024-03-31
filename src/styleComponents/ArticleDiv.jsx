@@ -7,9 +7,7 @@ const ArticleDiv = styled.div`
   align-content: center;
   max-width: 100%;
   height: auto;
-  & :hover {
-    border: 1px solid #777;
-  }
+  margin-bottom: 5rem;
 `;
 
 export default ArticleDiv;

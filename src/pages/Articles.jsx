@@ -20,7 +20,7 @@ export default function Articles() {
 
   if (isLoading) return <p>Page loading...</p>;
   return (
-    <section>
+    <section id="articles-page">
       <Header title={"Latest Articles"} />
       <div>
         <ul>
